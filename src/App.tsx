@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "./components/searchBar";
 import WeatherInfo from "./components/WeatherInfo";
-import { getWeather } from "./services/weatherService";
+import { getCitiesList, getWeather } from "./services/weatherService";
 import { WeatherData } from "./types";
 
 const App = () => {
+  useEffect(() => {
+    const aboba = async () => {
+      const list = await getCitiesList("Saint");
+      console.log(list);
+    };
+    void aboba();
+  }, []);
   const [curretCityData, setCurretData] = useState<WeatherData | null>(null);
   return (
     <div>
