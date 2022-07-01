@@ -8,7 +8,7 @@ export const useDelayField = (
   useEffect(() => {
     const handler = setTimeout(() => setDelayedField(NowField), timeDelay);
     return () => clearTimeout(handler);
-  }, [NowField]);
+  }, [NowField, timeDelay]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setNowField(e.target.value);

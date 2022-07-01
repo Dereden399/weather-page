@@ -8,14 +8,18 @@ const weatherLink =
 const citiesLink =
   "http://geodb-free-service.wirefreethought.com/v1/geo/cities?limit=10";
 
-export const getWeather = async (cityName: string): Promise<WeatherData> => {
+export const getWeather = async (
+  lon: number,
+  lat: number,
+  cityName: string
+): Promise<WeatherData> => {
   const { data: weather } = await axios.get<WeatherData>(
-    weatherLink + `&q=${cityName}&appid=${weatherApi}`
+    weatherLink + `&lon=${lon}&lat=${lat}&appid=${weatherApi}`
   );
   if (Number(weather.cod) !== 200) {
     throw new Error("city not found");
   }
-  return weather;
+  return { ...weather, name: cityName };
 };
 
 export const getCitiesList = async (cityName: string): Promise<CitiesList> => {

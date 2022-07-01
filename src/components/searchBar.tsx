@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
 import { useDelayField } from "../hooks";
+import { getCitiesList } from "../services/weatherService";
+import { CitiesList } from "../types";
 
-const SearchBar = () => {
+const SearchBar = ({
+  setList,
+}: {
+  setList: React.Dispatch<React.SetStateAction<CitiesList | null>>;
+}) => {
   const [data, handleData, delayedValue] = useDelayField(2000);
   useEffect(() => {
-    console.log(delayedValue);
+    const find = async () => {
+      const list = await getCitiesList(delayedValue.replace(" ", "+"));
+      setList(list);
+    };
+    if (delayedValue) void find();
   }, [delayedValue]);
   return (
     <input
