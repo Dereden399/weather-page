@@ -1,16 +1,22 @@
 import React from "react";
 import { getWeather } from "../services/weatherService";
-import { CitiesList, City, WeatherData } from "../types";
+import { CitiesList, City, SearchBarRefType, WeatherData } from "../types";
 
 const CitiesListElement = ({
   list,
   setWeather,
+  searchRef,
+  isVisible,
+  toggleVisible,
 }: {
   list: CitiesList | null;
   setWeather: React.Dispatch<React.SetStateAction<WeatherData | null>>;
+  searchRef: React.RefObject<SearchBarRefType>;
+  isVisible: boolean;
+  toggleVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   if (!list) return null;
-  if (list.data.length === 0) return null;
+  if (list.data.length === 0) return <h1>No cities found</h1>;
   const findAndSetWeather = async (
     e: React.MouseEvent<HTMLLIElement>,
     city: City
@@ -22,6 +28,7 @@ const CitiesListElement = ({
       city.name
     );
     setWeather(findedWeather);
+    if (searchRef && searchRef.current) searchRef.current.clearField();
   };
   return (
     <div>

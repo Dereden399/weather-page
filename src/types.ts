@@ -56,3 +56,5 @@ export interface City {
 export type CitiesList = {
   data: Array<City>;
 };
+
+export type SearchBarRefType = { clearField: () => void };

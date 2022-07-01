@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 
 export const useDelayField = (
   timeDelay: number = 1000
-): [string, (e: React.ChangeEvent<HTMLInputElement>) => void, string] => {
+): [
+  string,
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
+  string,
+  () => void
+] => {
   const [NowField, setNowField] = useState<string>("");
   const [delayedField, setDelayedField] = useState<string>("");
   useEffect(() => {
@@ -13,5 +18,9 @@ export const useDelayField = (
     e.preventDefault();
     setNowField(e.target.value);
   };
-  return [NowField, handleChange, delayedField];
+  const clearField = () => {
+    setNowField("");
+    setDelayedField("");
+  };
+  return [NowField, handleChange, delayedField, clearField];
 };
