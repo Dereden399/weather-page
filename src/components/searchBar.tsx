@@ -7,19 +7,43 @@ import React, {
 } from "react";
 import { useDelayField } from "../hooks";
 import { getCitiesList } from "../services/weatherService";
-import { CitiesList, SearchBarRefType } from "../types";
+import { CitiesList, SearchBarRefType, WeatherData } from "../types";
+import { FiHome } from "react-icons/fi";
 
 type SearchBarProps = {
   setList: React.Dispatch<React.SetStateAction<CitiesList | null>>;
   toggleVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
 };
 
 const CloseButton = ({ closeFunction }: { closeFunction: () => void }) => {
   return <button onClick={closeFunction}>close</button>;
 };
 
+const MainPageButton = ({
+  clearFunction,
+  setWeather,
+}: {
+  clearFunction: () => void;
+  setWeather: React.Dispatch<React.SetStateAction<WeatherData | null>>;
+}) => {
+  return (
+    <button
+      onClick={() => {
+        clearFunction();
+        setWeather(null);
+      }}
+    >
+      <FiHome />
+    </button>
+  );
+};
+
 const SearchBar = forwardRef(
-  ({ setList, toggleVisible }: SearchBarProps, ref: Ref<SearchBarRefType>) => {
+  (
+    { setList, toggleVisible, setWeatherData }: SearchBarProps,
+    ref: Ref<SearchBarRefType>
+  ) => {
     const [data, handleData, delayedValue, clear] = useDelayField(2000);
     const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
     useEffect(() => {
@@ -54,6 +78,10 @@ const SearchBar = forwardRef(
             handleData(e);
           }}
           onClick={e => setIsSearchActive(true)}
+        />
+        <MainPageButton
+          clearFunction={clearField}
+          setWeather={setWeatherData}
         />
       </div>
     );
