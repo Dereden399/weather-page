@@ -1,18 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import CitiesListElement from "./components/CitiesListElement";
 import SearchBar from "./components/searchBar";
 import WeatherInfo from "./components/WeatherInfo";
-import { getCitiesList, getWeather } from "./services/weatherService";
 import { CitiesList, SearchBarRefType, WeatherData } from "./types";
 
 /*
 ToDo:
-1. Refactor this horrible mess
-2. Expand weather info block 
+1. Refactor this horrible mess 
+2. Expand weather info block  - x
 3. Add styling
 4. Add favourite places via cookies
-
-
+5. Fix the bug with the delayed search when the close button is pressed
 */
 
 const App = () => {
@@ -24,6 +22,7 @@ const App = () => {
   );
   const [isListVisible, setListVisible] = useState<boolean>(false);
   const SearchBarRef = useRef<SearchBarRefType>(null);
+
   return (
     <div>
       <SearchBar

@@ -19,22 +19,22 @@ const CloseButton = ({ closeFunction }: { closeFunction: () => void }) => {
 };
 
 const SearchBar = forwardRef(
-  (props: SearchBarProps, ref: Ref<SearchBarRefType>) => {
+  ({ setList, toggleVisible }: SearchBarProps, ref: Ref<SearchBarRefType>) => {
     const [data, handleData, delayedValue, clear] = useDelayField(2000);
     const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
     useEffect(() => {
       const find = async () => {
         const list = await getCitiesList(delayedValue.replace(" ", "+"));
-        props.setList(list);
+        setList(list);
       };
       if (delayedValue) void find();
-    }, [delayedValue]);
+    }, [delayedValue, setList]);
 
     const clearField = () => {
       clear();
       setIsSearchActive(false);
-      props.setList(null);
-      props.toggleVisible(false);
+      setList(null);
+      toggleVisible(false);
     };
 
     useImperativeHandle(ref, () => {
@@ -50,7 +50,7 @@ const SearchBar = forwardRef(
           placeholder='Type city name here...'
           value={data}
           onChange={e => {
-            props.toggleVisible(true);
+            toggleVisible(true);
             handleData(e);
           }}
           onClick={e => setIsSearchActive(true)}
