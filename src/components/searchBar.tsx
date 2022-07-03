@@ -12,8 +12,9 @@ import { FiHome } from "react-icons/fi";
 
 type SearchBarProps = {
   setList: React.Dispatch<React.SetStateAction<CitiesList | null>>;
-  toggleVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleActive: React.Dispatch<React.SetStateAction<boolean>>;
   setWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
+  isActive: boolean;
 };
 
 const CloseButton = ({ closeFunction }: { closeFunction: () => void }) => {
@@ -41,11 +42,10 @@ const MainPageButton = ({
 
 const SearchBar = forwardRef(
   (
-    { setList, toggleVisible, setWeatherData }: SearchBarProps,
+    { setList, toggleActive, setWeatherData, isActive }: SearchBarProps,
     ref: Ref<SearchBarRefType>
   ) => {
     const [data, handleData, delayedValue, clear] = useDelayField(2000);
-    const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
     useEffect(() => {
       const find = async () => {
         const list = await getCitiesList(delayedValue.replace(" ", "+"));
@@ -56,9 +56,8 @@ const SearchBar = forwardRef(
 
     const clearField = () => {
       clear();
-      setIsSearchActive(false);
+      toggleActive(false);
       setList(null);
-      toggleVisible(false);
     };
 
     useImperativeHandle(ref, () => {
@@ -69,15 +68,15 @@ const SearchBar = forwardRef(
 
     return (
       <div>
-        {isSearchActive ? <CloseButton closeFunction={clearField} /> : null}
+        {isActive ? <CloseButton closeFunction={clearField} /> : null}
         <input
           placeholder='Type city name here...'
           value={data}
           onChange={e => {
-            toggleVisible(true);
+            toggleActive(true);
             handleData(e);
           }}
-          onClick={e => setIsSearchActive(true)}
+          onClick={e => toggleActive(true)}
         />
         <MainPageButton
           clearFunction={clearField}
