@@ -39,7 +39,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='bg-waterBackground bg-cover bg-no-repeat bg-right-top w-screen h-screen p-1'>
       <SearchBar
         setList={setFindedCitiesList}
         ref={SearchBarRef}

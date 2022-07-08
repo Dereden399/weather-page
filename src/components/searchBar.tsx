@@ -17,8 +17,37 @@ type SearchBarProps = {
   isActive: boolean;
 };
 
-const CloseButton = ({ closeFunction }: { closeFunction: () => void }) => {
-  return <button onClick={closeFunction}>close</button>;
+const CloseButton = ({
+  closeFunction,
+  isActive,
+}: {
+  closeFunction: () => void;
+  isActive: boolean;
+}) => {
+  return (
+    <button
+      onClick={closeFunction}
+      className={`transition-all duration-150 ease-in-out ${
+        isActive ? "scale-100" : "scale-0"
+      }`}
+    >
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        className='h-8 w-8 stroke-mainBlue-200 md:h-16 md:w-16'
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke='currentColor'
+        strokeWidth={1}
+      >
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          d='M6 18L18 6M6 6l12 12'
+        />
+        <circle cx='0.75rem' cy='0.75rem' r='0.7rem' />
+      </svg>
+    </button>
+  );
 };
 
 const MainPageButton = ({
@@ -30,12 +59,27 @@ const MainPageButton = ({
 }) => {
   return (
     <button
+      className='hover:scale-105 transition-transform duration-150'
       onClick={() => {
         clearFunction();
         setWeather(null);
       }}
     >
-      <FiHome />
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        className='h-8 w-8 stroke-mainBlue-200 md:h-16 md:w-16'
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke='currentColor'
+        strokeWidth={1}
+      >
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+        />
+        <circle cx='0.75rem' cy='0.75rem' r='0.7rem' />
+      </svg>
     </button>
   );
 };
@@ -67,9 +111,11 @@ const SearchBar = forwardRef(
     });
 
     return (
-      <div>
-        {isActive ? <CloseButton closeFunction={clearField} /> : null}
+      <div className='flex flex-row justify-between'>
+        <CloseButton closeFunction={clearField} isActive={isActive} />
         <input
+          className='border-solid border-mainBlue-300 rounded-3xl border-2 bg-transparent
+          text-center focus:outline-0 text-mainBlue-100 placeholder:text-mainBlue-100 w-3/4 h-8 md:h-16 md:text-2xl'
           placeholder='Type city name here...'
           value={data}
           onChange={e => {
