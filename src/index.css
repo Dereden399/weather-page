@@ -33,3 +33,29 @@
     url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBBc4AMP6lQ.woff2)
       format("woff2");
 }
+@layer components {
+  .searchPanel {
+    @apply bg-mainBlue-400/90 w-full h-8 md:h-12 md:text-2xl max-w-5xl place-items-center rounded-3xl flex flex-row justify-end;
+  }
+}
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #ebf2fc;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #badeff;
+    border-radius: 100vh;
+    border: 1px solid #89acce;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7aa1c5;
+  }
+}

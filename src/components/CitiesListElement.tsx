@@ -33,10 +33,18 @@ const CityListElement = ({
     isFavourite = false;
   };
   return (
-    <li key={city.id}>
-      <b onClick={e => clickHandler(e, city)}>{city.name}</b>
+    <li key={city.id} className='searchPanel'>
+      <p onClick={e => clickHandler(e, city)} className='w-full text-center'>
+        {city.name}
+      </p>
       <button onClick={favHandler}>
-        <HiStar color={isFavourite ? "yellow" : "gray"} size={24} />
+        <HiStar
+          className={`h-8 w-8 md:h-12 md:w-12 ${
+            isFavourite
+              ? "fill-yellow-300 active:fill-yellow-500"
+              : "fill-gray-600 active:fill-gray-700"
+          }`}
+        />
       </button>
     </li>
   );
@@ -57,10 +65,12 @@ const FavCityElement = ({
     setFavCities({ data: favList.data.filter(x => x.name !== city.name) });
   };
   return (
-    <li key={city.id}>
-      <b onClick={e => clickHandler(e, city)}>{city.name}</b>
+    <li key={city.id} className='searchPanel'>
+      <p onClick={e => clickHandler(e, city)} className='w-full text-center'>
+        {city.name}
+      </p>
       <button onClick={favHandler}>
-        <HiStar color={"yellow"} size={24} />
+        <HiStar className='h-8 w-8 md:h-12 md:w-12 fill-yellow-300 active:fill-yellow-500' />
       </button>
     </li>
   );
@@ -83,7 +93,7 @@ const FavList = ({
   return (
     <>
       {alertActive ? <p>You can save only 9 favourite cities</p> : null}
-      <ul>
+      <ul className='w-full flex flex-col gap-y-2'>
         {favList.data.map(el => (
           <FavCityElement
             setFavCities={setFavCities}
@@ -93,7 +103,7 @@ const FavList = ({
           />
         ))}
       </ul>
-      <hr />
+      <hr className='w-full max-w-5xl my-2 bg-mainBlue-100' />
     </>
   );
 };
@@ -114,8 +124,6 @@ const CitiesListElement = ({
   isVisible: boolean;
 }) => {
   const [alertActive, setAlertActive] = useState<boolean>(false);
-  if (!isVisible) return null;
-
   const toggleAlert = () => {
     window.localStorage.removeItem("alertTimer");
     setAlertActive(true);
@@ -137,53 +145,37 @@ const CitiesListElement = ({
     if (searchRef && searchRef.current) searchRef.current.clearField();
   };
   const favLength = favCitiesList.data.length;
-  if (!list)
-    return (
-      <div>
-        <FavList
-          setFavCities={setFavCitiesList}
-          clickHandler={findAndSetWeather}
-          len={favLength}
-          favList={favCitiesList}
-          alertActive={alertActive}
-        />
-      </div>
-    );
-  if (list.data.length === 0)
-    return (
-      <div>
-        <FavList
-          setFavCities={setFavCitiesList}
-          clickHandler={findAndSetWeather}
-          len={favLength}
-          favList={favCitiesList}
-          alertActive={alertActive}
-        />
-        <h2>No cities found</h2>
-      </div>
-    );
-
   return (
-    <div>
-      <FavList
-        setFavCities={setFavCitiesList}
-        clickHandler={findAndSetWeather}
-        len={favLength}
-        favList={favCitiesList}
-        alertActive={alertActive}
-      />
-      <ul>
-        {list.data.map(listElement => (
-          <CityListElement
-            setFavCities={setFavCitiesList}
-            clickHandler={findAndSetWeather}
-            city={listElement}
-            favList={favCitiesList}
-            favLen={favLength}
-            toggleAlert={toggleAlert}
-          />
-        ))}
-      </ul>
+    <div
+      className={`absolute -top-[100vh] ${
+        isVisible ? "top-0" : null
+      } h-screen w-screen transition-all duration-300 ease-in-out bg-mainBlue-700/60 backdrop-blur-lg p-1 md:p-2 lg:p-3 flex flex-col items-center`}
+    >
+      <div className='flex flex-col mt-12 md:mt-16 h-full items-center w-full lg:w-3/4 max-w-5xl text-white overflow-y-auto scrollbar'>
+        <FavList
+          setFavCities={setFavCitiesList}
+          clickHandler={findAndSetWeather}
+          len={favLength}
+          favList={favCitiesList}
+          alertActive={alertActive}
+        />
+        {!list ? null : list.data.length > 0 ? (
+          <ul className='w-full flex flex-col h-full gap-y-2'>
+            {list.data.map(listElement => (
+              <CityListElement
+                setFavCities={setFavCitiesList}
+                clickHandler={findAndSetWeather}
+                city={listElement}
+                favList={favCitiesList}
+                favLen={favLength}
+                toggleAlert={toggleAlert}
+              />
+            ))}
+          </ul>
+        ) : (
+          <h2>No cities found</h2>
+        )}
+      </div>
     </div>
   );
 };

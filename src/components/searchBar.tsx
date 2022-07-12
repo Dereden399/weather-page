@@ -111,7 +111,7 @@ const SearchBar = forwardRef(
     });
 
     return (
-      <div className='flex flex-row justify-between w-full'>
+      <div className='flex flex-row justify-between w-full z-20'>
         <CloseButton closeFunction={clearField} isActive={isActive} />
         <input
           className='border-solid border-mainBlue-300 rounded-3xl border-2 bg-transparent
