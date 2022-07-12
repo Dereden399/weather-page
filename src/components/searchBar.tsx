@@ -33,7 +33,7 @@ const CloseButton = ({
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        className='h-8 w-8 stroke-mainBlue-200 md:h-16 md:w-16'
+        className='h-8 w-8 stroke-mainBlue-200 md:h-12 md:w-12'
         fill='none'
         viewBox='0 0 24 24'
         stroke='currentColor'
@@ -67,7 +67,7 @@ const MainPageButton = ({
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        className='h-8 w-8 stroke-mainBlue-200 md:h-16 md:w-16'
+        className='h-8 w-8 stroke-mainBlue-200 md:h-12 md:w-12'
         fill='none'
         viewBox='0 0 24 24'
         stroke='currentColor'
@@ -111,11 +111,11 @@ const SearchBar = forwardRef(
     });
 
     return (
-      <div className='flex flex-row justify-between'>
+      <div className='flex flex-row justify-between w-full'>
         <CloseButton closeFunction={clearField} isActive={isActive} />
         <input
           className='border-solid border-mainBlue-300 rounded-3xl border-2 bg-transparent
-          text-center focus:outline-0 text-mainBlue-100 placeholder:text-mainBlue-100 w-3/4 h-8 md:h-16 md:text-2xl'
+          text-center focus:outline-0 text-mainBlue-100 placeholder:text-mainBlue-100 w-3/4 h-8 md:h-12 md:text-2xl max-w-5xl'
           placeholder='Type city name here...'
           value={data}
           onChange={e => {
