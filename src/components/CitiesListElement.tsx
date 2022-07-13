@@ -139,7 +139,8 @@ const CitiesListElement = ({
     const findedWeather = await getWeather(
       city.longitude,
       city.latitude,
-      city.name
+      city.name,
+      city.country
     );
     setWeather(findedWeather);
     if (searchRef && searchRef.current) searchRef.current.clearField();

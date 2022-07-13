@@ -11,7 +11,8 @@ const citiesLink =
 export const getWeather = async (
   lon: number,
   lat: number,
-  cityName: string
+  cityName: string,
+  country: string
 ): Promise<WeatherData> => {
   const { data: weather } = await axios.get<WeatherData>(
     weatherLink + `&lon=${lon}&lat=${lat}&appid=${weatherApi}`
@@ -19,7 +20,9 @@ export const getWeather = async (
   if (Number(weather.cod) !== 200) {
     throw new Error("city not found");
   }
-  return { ...weather, name: cityName };
+  let toReturn = { ...weather, name: cityName };
+  toReturn.sys.country = country;
+  return toReturn;
 };
 
 export const getCitiesList = async (cityName: string): Promise<CitiesList> => {
