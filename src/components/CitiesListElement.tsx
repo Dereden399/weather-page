@@ -92,7 +92,11 @@ const FavList = ({
   if (!len) return null;
   return (
     <>
-      {alertActive ? <p>You can save only 9 favourite cities</p> : null}
+      {alertActive ? (
+        <p className='bg-red-800 border-red-600 border-2 text-xl rounded-3xl text-red-300 p-1 w-full text-center my-2'>
+          You can save only 9 favourite cities
+        </p>
+      ) : null}
       <ul className='w-full flex flex-col gap-y-2'>
         {favList.data.map(el => (
           <FavCityElement
@@ -127,7 +131,7 @@ const CitiesListElement = ({
   const toggleAlert = () => {
     window.localStorage.removeItem("alertTimer");
     setAlertActive(true);
-    const tim = setTimeout(() => setAlertActive(false), 1000);
+    const tim = setTimeout(() => setAlertActive(false), 3000);
     window.localStorage.setItem("alertTimer", String(tim));
   };
 

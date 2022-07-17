@@ -5,7 +5,7 @@ const MainPage = () => {
     <div className='h-full w-full flex flex-col items-center justify-start'>
       <div
         className='bg-mainBlue-200/70 rounded-2xl flex flex-col items-center justify-center p-1 h-[calc(100vh-4rem)] mt-4
-      font-roboto font-light text-white text-xl md:text-3xl md:p-2 md:h-[calc(100vh-6rem)] lg:w-3/4 max-w-5xl lg:h-3/4 lg:mt-0'
+      font-roboto font-light text-white text-xl md:text-3xl md:p-2 md:h-[calc(100vh-6rem)] lg:w-3/4 max-w-5xl lg:h-3/4'
       >
         <div className='flex flex-row items-center w-full'>
           <img
