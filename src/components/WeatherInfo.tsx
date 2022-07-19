@@ -63,7 +63,7 @@ const WeatherInfo = () => {
           </div>
         </div>
         <div className='h-full w-full flex flex-col justify-start overflow-y-auto scrollbar overflow-hidden bg-mainColor-300/80 rounded-b-2xl lg:basis-5/12 lg:rounded-tr-2xl lg:rounded-bl-none lg:overflow-y-hidden'>
-          <div className='h-auto w-full grid grid-cols-2 grid-rows-5 items-center gap-x-1 gap-y-2 md:grid-cols-6 md:grid-rows-3 md:h-full md:my-12 md:gap-x-4 md:gap-y-10 lg:grid-rows-5 lg:grid-cols-2 lg:gap-y-2 lg:px-4 lg:py-8 lg:my-0'>
+          <div className='h-auto w-full grid grid-cols-2 grid-rows-5 px-2 mb-2 items-center gap-x-1 gap-y-2 md:grid-cols-6 md:grid-rows-3 md:h-full md:my-12 md:gap-x-4 md:gap-y-10 lg:grid-rows-5 lg:grid-cols-2 lg:gap-y-2 lg:px-4 lg:py-8 lg:my-0'>
             <div className='weatherPanel md:col-span-2 lg:col-span-1'>
               <FiCloud className='h-16 w-16 fill-gray-200 stroke-gray-200 md:h-[4.5rem] md:w-[4.5rem]' />
               <p className='text-center grow md:text-3xl lg:text-lg'>
