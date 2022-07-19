@@ -1,19 +1,12 @@
-import React, {
-  forwardRef,
-  Ref,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react";
+import React, { forwardRef, Ref, useEffect, useImperativeHandle } from "react";
 import { useDelayField } from "../hooks";
 import { getCitiesList } from "../services/weatherService";
-import { CitiesList, SearchBarRefType, WeatherData } from "../types";
-import { FiHome } from "react-icons/fi";
+import { SearchBarRefType } from "../types";
+import { useStateValue } from "../state";
+import { setFindedCities, setSelectedCityWeather } from "../actionCreators";
 
 type SearchBarProps = {
-  setList: React.Dispatch<React.SetStateAction<CitiesList | null>>;
   toggleActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
   isActive: boolean;
 };
 
@@ -50,19 +43,14 @@ const CloseButton = ({
   );
 };
 
-const MainPageButton = ({
-  clearFunction,
-  setWeather,
-}: {
-  clearFunction: () => void;
-  setWeather: React.Dispatch<React.SetStateAction<WeatherData | null>>;
-}) => {
+const MainPageButton = ({ clearFunction }: { clearFunction: () => void }) => {
+  const [, dispatch] = useStateValue();
   return (
     <button
       className='hover:scale-105 transition-transform duration-150'
       onClick={() => {
         clearFunction();
-        setWeather(null);
+        dispatch(setSelectedCityWeather(null));
       }}
     >
       <svg
@@ -85,23 +73,21 @@ const MainPageButton = ({
 };
 
 const SearchBar = forwardRef(
-  (
-    { setList, toggleActive, setWeatherData, isActive }: SearchBarProps,
-    ref: Ref<SearchBarRefType>
-  ) => {
+  ({ toggleActive, isActive }: SearchBarProps, ref: Ref<SearchBarRefType>) => {
     const [data, handleData, delayedValue, clear] = useDelayField(2000);
+    const [, dispatch] = useStateValue();
     useEffect(() => {
       const find = async () => {
         const list = await getCitiesList(delayedValue.replace(" ", "+"));
-        setList(list);
+        dispatch(setFindedCities(list));
       };
       if (delayedValue) void find();
-    }, [delayedValue, setList]);
+    }, [delayedValue, dispatch]);
 
     const clearField = () => {
       clear();
       toggleActive(false);
-      setList(null);
+      dispatch(setFindedCities(null));
     };
 
     useImperativeHandle(ref, () => {
@@ -124,10 +110,7 @@ const SearchBar = forwardRef(
           }}
           onClick={e => toggleActive(true)}
         />
-        <MainPageButton
-          clearFunction={clearField}
-          setWeather={setWeatherData}
-        />
+        <MainPageButton clearFunction={clearField} />
       </div>
     );
   }

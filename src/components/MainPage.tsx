@@ -22,9 +22,9 @@ const MainPage = () => {
             </p>
             <p>
               A pretty simple but useful page, where you can see the weather in
-              different cities all over the world. It uses tailwindCss for
-              styling and cookies for storing favourite cities. The weather
-              information is provided by{" "}
+              different cities all over the world. It uses tailwind Css for
+              styling and cookies for storing favourite cities. Also the Context
+              API is used.The weather information is provided by{" "}
               <a
                 className='text-mainBlue-100 font-medium'
                 href='https://openweathermap.org/'
@@ -45,8 +45,8 @@ const MainPage = () => {
           <p className='lg:hidden'>
             A pretty simple but useful page, where you can see the weather in
             different cities all over the world. It uses tailwindCss for styling
-            and cookies for storing favourite cities. The weather information is
-            provided by{" "}
+            and cookies for storing favourite cities. Also the Context API is
+            used. The weather information is provided by{" "}
             <a
               className='text-mainBlue-100 font-medium'
               href='https://openweathermap.org/'

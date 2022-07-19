@@ -1,10 +1,12 @@
 import React from "react";
-import { WeatherData } from "../types";
 import { IoIosWater } from "react-icons/io";
 import { FiWind, FiCloud } from "react-icons/fi";
 import { WiSunrise, WiSunset } from "react-icons/wi";
+import { useStateValue } from "../state";
 
-const WeatherInfo = ({ data }: { data: WeatherData }) => {
+const WeatherInfo = () => {
+  const [{ selectedCityWeather: data }] = useStateValue();
+  if (!data) return null;
   const timeOfCalc = new Date(data.dt);
   const sunrise = new Date(data.sys.sunrise);
   const sunset = new Date(data.sys.sunset);
