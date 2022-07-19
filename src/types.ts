@@ -58,3 +58,8 @@ export type CitiesList = {
 };
 
 export type SearchBarRefType = { clearField: () => void };
+
+export enum Theme {
+  Rainy = "RAINY",
+  Sunny = "SUNNY",
+}

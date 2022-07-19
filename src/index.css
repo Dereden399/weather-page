@@ -33,12 +33,21 @@
     url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBBc4AMP6lQ.woff2)
       format("woff2");
 }
+:root {
+  --mainColor-100: 181 215 255;
+  --mainColor-200: 140 175 220;
+  --mainColor-300: 109 147 193;
+  --mainColor-400: 100 136 179;
+  --mainColor-500: 61 99 140;
+  --mainColor-600: 17 64 102;
+  --mainColor-700: 10 43 69;
+}
 @layer components {
   .searchPanel {
-    @apply bg-mainBlue-400/90 w-full h-8 md:h-12 md:text-2xl max-w-5xl place-items-center rounded-3xl flex flex-row justify-end cursor-pointer;
+    @apply bg-mainColor-400/90 w-full h-8 md:h-12 md:text-2xl max-w-5xl place-items-center rounded-3xl flex flex-row justify-end cursor-pointer;
   }
   .weatherPanel {
-    @apply bg-gradient-to-b from-mainBlue-300 to-mainBlue-200/50 flex flex-row justify-between h-full items-center p-1 px-4 rounded-[4rem] font-bold text-xl w-full hover:scale-105 transition-all duration-75;
+    @apply bg-gradient-to-b from-mainColor-300 to-mainColor-200/50 flex flex-row justify-between h-full items-center p-1 px-4 rounded-[4rem] font-bold text-xl w-full hover:scale-105 transition-all duration-75;
   }
 }
 @layer utilities {

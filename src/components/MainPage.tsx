@@ -4,7 +4,7 @@ const MainPage = () => {
   return (
     <div className='h-full w-full flex flex-col items-center justify-start'>
       <div
-        className='bg-mainBlue-200/70 rounded-2xl flex flex-col items-center justify-center p-1 h-[calc(100vh-4rem)] mt-4
+        className='bg-mainColor-200/70 rounded-2xl flex flex-col items-center justify-center p-1 h-[calc(100vh-4rem)] mt-4
       font-roboto font-light text-white text-xl md:text-3xl md:p-2 md:h-[calc(100vh-6rem)] lg:w-3/4 max-w-5xl lg:h-3/4'
       >
         <div className='flex flex-row items-center w-full'>
@@ -26,14 +26,14 @@ const MainPage = () => {
               styling and cookies for storing favourite cities. Also the Context
               API is used.The weather information is provided by{" "}
               <a
-                className='text-mainBlue-100 font-medium'
+                className='text-mainColor-100 font-medium'
                 href='https://openweathermap.org/'
               >
                 OpenWeatherMap
               </a>{" "}
               and cities list is provided by{" "}
               <a
-                className='text-mainBlue-100 font-medium'
+                className='text-mainColor-100 font-medium'
                 href='http://geodb-cities-api.wirefreethought.com/'
               >
                 GeoDB Cities Api
@@ -48,14 +48,14 @@ const MainPage = () => {
             and cookies for storing favourite cities. Also the Context API is
             used. The weather information is provided by{" "}
             <a
-              className='text-mainBlue-100 font-medium'
+              className='text-mainColor-100 font-medium'
               href='https://openweathermap.org/'
             >
               OpenWeatherMap
             </a>{" "}
             and cities list is provided by{" "}
             <a
-              className='text-mainBlue-100 font-medium'
+              className='text-mainColor-100 font-medium'
               href='http://geodb-cities-api.wirefreethought.com/'
             >
               GeoDB Cities Api

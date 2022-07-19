@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getWeather } from "../services/weatherService";
-import { CitiesList, City, SearchBarRefType } from "../types";
+import { CitiesList, City, SearchBarRefType, Theme } from "../types";
 import { HiStar } from "react-icons/hi";
 import { useStateValue } from "../state";
 import { setSelectedCityWeather } from "../actionCreators";
@@ -110,7 +110,7 @@ const FavList = ({
           />
         ))}
       </ul>
-      <hr className='w-full max-w-5xl my-2 bg-mainBlue-100' />
+      <hr className='w-full max-w-5xl my-2 bg-mainColor-100' />
     </>
   );
 };
@@ -119,10 +119,12 @@ const CitiesListElement = ({
   searchRef,
   setFavCitiesList,
   isVisible,
+  changeTheme,
 }: {
   searchRef: React.RefObject<SearchBarRefType>;
   setFavCitiesList: (list: CitiesList) => void;
   isVisible: boolean;
+  changeTheme: (theme: Theme) => void;
 }) => {
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [{ favCitiesList, findedCitiesList }, dispatch] = useStateValue();
@@ -145,6 +147,16 @@ const CitiesListElement = ({
       city.country
     );
     dispatch(setSelectedCityWeather(findedWeather));
+    if (
+      findedWeather.weather[0].id <= 321 ||
+      (findedWeather.weather[0].id >= 511 &&
+        findedWeather.weather[0].id <= 781) ||
+      findedWeather.weather[0].id >= 802
+    ) {
+      changeTheme(Theme.Rainy);
+    } else {
+      changeTheme(Theme.Sunny);
+    }
     if (searchRef && searchRef.current) searchRef.current.clearField();
   };
   const favLength = favCitiesList.data.length;
@@ -152,7 +164,7 @@ const CitiesListElement = ({
     <div
       className={`absolute -top-[100vh] ${
         isVisible ? "top-0" : null
-      } h-screen w-screen transition-all duration-300 ease-in-out bg-mainBlue-700/60 backdrop-blur-lg p-1 md:p-2 lg:p-3 flex flex-col items-center`}
+      } h-screen w-screen transition-all duration-300 ease-in-out bg-mainColor-700/60 backdrop-blur-lg p-1 md:p-2 lg:p-3 flex flex-col items-center`}
     >
       <div className='flex flex-col mt-12 md:mt-16 h-full items-center w-full lg:w-3/4 max-w-5xl text-white overflow-y-auto scrollbar'>
         <FavList
