@@ -151,7 +151,9 @@ const CitiesListElement = ({
       findedWeather.weather[0].id <= 321 ||
       (findedWeather.weather[0].id >= 511 &&
         findedWeather.weather[0].id <= 781) ||
-      findedWeather.weather[0].id >= 802
+      findedWeather.weather[0].id >= 802 ||
+      (findedWeather.weather[0].id === 801 &&
+        findedWeather.weather[0].icon === "02n")
     ) {
       changeTheme(Theme.Rainy);
     } else {

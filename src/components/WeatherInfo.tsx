@@ -39,7 +39,7 @@ const WeatherInfo = () => {
               {timeOfCalc.getHours()}:{timeOfCalc.getMinutes()}
             </p>
           </div>
-          <div className='h-full max-h-full w-full flex flex-col justify-start bg-mainColor-300/80 p-3 md:p-5 lg:bg-mainColor-600/80 lg:rounded-bl-2xl lg:text-lg'>
+          <div className='h-full max-h-full w-full flex flex-col justify-start bg-mainColor-300/80 p-3 md:p-5 lg:bg-mainColor-700/80 lg:rounded-bl-2xl lg:text-lg'>
             <div className='flex flex-row justify-start items-center pl-2'>
               <p className='font-bold text-4xl md:text-8xl lg:text-7xl'>
                 {Math.floor(data.main.temp)}°C
