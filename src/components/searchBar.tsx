@@ -78,6 +78,7 @@ const SearchBar = forwardRef(
     const [, dispatch] = useStateValue();
     useEffect(() => {
       const find = async () => {
+        dispatch(setFindedCities(null));
         const list = await getCitiesList(delayedValue.replace(" ", "+"));
         dispatch(setFindedCities(list));
       };

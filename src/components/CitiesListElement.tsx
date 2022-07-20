@@ -4,6 +4,29 @@ import { CitiesList, City, SearchBarRefType, Theme } from "../types";
 import { HiStar } from "react-icons/hi";
 import { useStateValue } from "../state";
 import { setSelectedCityWeather } from "../actionCreators";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+
+const listElementVariants: Variants = {
+  closed: {
+    opacity: 0,
+    y: 100,
+  },
+  open: {
+    opacity: 1,
+    y: 0,
+  },
+};
+const listVarinats: Variants = {
+  closed: {
+    opacity: 1,
+  },
+  open: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
 
 const CityListElement = ({
   setFavCities,
@@ -36,20 +59,31 @@ const CityListElement = ({
     isFavourite = false;
   };
   return (
-    <li className='searchPanel'>
-      <p onClick={e => clickHandler(e, city)} className='w-full text-center'>
-        {city.name}
-      </p>
-      <button onClick={favHandler}>
-        <HiStar
-          className={`h-8 w-8 md:h-12 md:w-12 ${
-            isFavourite
-              ? "fill-yellow-300 active:fill-yellow-500"
-              : "fill-gray-600 active:fill-gray-700"
-          }`}
-        />
-      </button>
-    </li>
+    <AnimatePresence>
+      {isFavourite ? null : (
+        <motion.li
+          className='searchPanel'
+          variants={listElementVariants}
+          exit={{ opacity: 0, x: -100 }}
+        >
+          <p
+            onClick={e => clickHandler(e, city)}
+            className='w-full text-center'
+          >
+            {city.name}
+          </p>
+          <button onClick={favHandler}>
+            <HiStar
+              className={`h-8 w-8 md:h-12 md:w-12 ${
+                isFavourite
+                  ? "fill-yellow-300 active:fill-yellow-500"
+                  : "fill-gray-600 active:fill-gray-700"
+              }`}
+            />
+          </button>
+        </motion.li>
+      )}
+    </AnimatePresence>
   );
 };
 
@@ -175,24 +209,32 @@ const CitiesListElement = ({
           len={favLength}
           alertActive={alertActive}
         />
-        {!findedCitiesList ? null : findedCitiesList.data.length > 0 ? (
-          <ul className='w-full flex flex-col h-full gap-y-2'>
-            {findedCitiesList.data.map(listElement => (
-              <CityListElement
-                setFavCities={setFavCitiesList}
-                clickHandler={findAndSetWeather}
-                city={listElement}
-                favLen={favLength}
-                toggleAlert={toggleAlert}
-                key={listElement.id}
-              />
-            ))}
-          </ul>
-        ) : (
-          <h2 className='text-center my-2 text-xl font-roboto font-regular'>
-            No cities found
-          </h2>
-        )}
+        <AnimatePresence>
+          {!findedCitiesList ? null : findedCitiesList.data.length > 0 ? (
+            <motion.ul
+              className='w-full flex flex-col h-full gap-y-2'
+              variants={listVarinats}
+              initial='closed'
+              animate='open'
+              exit={{ opacity: 0, x: -100, transition: { duration: 0.1 } }}
+            >
+              {findedCitiesList.data.map(listElement => (
+                <CityListElement
+                  setFavCities={setFavCitiesList}
+                  clickHandler={findAndSetWeather}
+                  city={listElement}
+                  favLen={favLength}
+                  toggleAlert={toggleAlert}
+                  key={listElement.id}
+                />
+              ))}
+            </motion.ul>
+          ) : (
+            <h2 className='text-center my-2 text-xl font-roboto font-regular'>
+              No cities found
+            </h2>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
