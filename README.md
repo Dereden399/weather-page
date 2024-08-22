@@ -1,39 +1,17 @@
 # Weather page project
 
-Pretty small weather page using React and TailwindCss.
-Weather data from https://openweathermap.org/
+A small frontend project that provides a straightforward way to check the weather. The project features smooth animations, multiple color themes, and a mobile-first design, creating a minimalistic yet aesthetically pleasing interface. It also integrates API fetching, with weather data sourced from [OpenWeatherMap](https://openweathermap.org/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Running the Project
 
-## Available Scripts
+To start the project, run the following command:
 
-In the project directory, you can run:
+```bash
+npm start
+```
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies
+- React
+- Typescript
+- Framer Motion
+- Tailwind CSS
